@@ -5,9 +5,6 @@
 
 ## Technologies
 > - Javascript
-> - React.js
-> - HTML5
-> - CSS3
 > - Express
 > - Node
 > - PostgresQL
