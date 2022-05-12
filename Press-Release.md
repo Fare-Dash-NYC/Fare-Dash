@@ -3,7 +3,7 @@
 > Fare Evasion to prison pipeline. 
 
 ## Mission Statement
-> Fare Dash is a platform that provides real-time updates of reported police sightings at stations, and direct donations to provide metro cards to eligible users.
+> Fare Dash is a platform that provides real-time updates of police sightings at stations, and access to a reduced MTA fare by allowing users to make onsite reports of police activity and gifting a metro card to those who are eligible with the goal of decreasing the number of people receiving $100 fines for fare evasion. 
 
 ## Summary
 > The MTA released slides showing fare evasion rising to historically high levels on subways and even more so on buses. 
@@ -15,9 +15,9 @@
 > They’re preying on black youth, using that as an excuse to stop and frisk and to fill their monthly quotas.  
 
 ## Solution
-> - This application allows users to report police presence and stay away from high concentrated area.
-> - less youth being stopped, less people entering crininal justice system for petty crime.
-> - Also provides resources to Fair Fares and a direct link to dispute fare evasion ticket.
+> - This application allows users to report police presence and stay away from high concentrated areas.
+> - Less youth being stopped, less people entering crininal justice system for petty crime.
+> - Provides resources to Fair Fares and a direct link to dispute fare evasion ticket.
 
 ## Key Technical Challenge 
 > Our most challenging technical challenge will be trying to implement the heat map. 
