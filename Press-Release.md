@@ -16,7 +16,7 @@
 
 ## Solution
 > - This application allows users to report police presence and stay away from high concentrated areas.
-> - Less youth being stopped, less people entering crininal justice system for petty crime.
+> - Less youth being stopped, less people entering criminal justice system for petty crime.
 > - Provides resources to Fair Fares and a direct link to dispute fare evasion ticket.
 
 ## Key Technical Challenge 
