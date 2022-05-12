@@ -8,7 +8,6 @@ exports.up = function(knex) {
         table.integer("user_id").notNullable()
         table.integer("station_id").notNullable();
         table.string("incident").notNullable();
-        table.timestamp("time").defaultTo(knex.fn.now());
         table.string("more_details");
         table.boolean("confirm");
       });
