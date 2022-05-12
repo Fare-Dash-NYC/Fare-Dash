@@ -1,6 +1,9 @@
 # Fare-Dash-NYC
 ## Press Release
-> Fare Evasion to prison pipeline.
+> Fare Evasion to prison pipeline. 
+
+## Mission Statement
+> Fare Dash is a platform that provides real-time updates of reported police sightings at stations, and direct donations to provide metro cards to eligible users.
 
 ## Summary
 > The MTA released slides showing fare evasion rising to historically high levels on subways and even more so on buses. 
