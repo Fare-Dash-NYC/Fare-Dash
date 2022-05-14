@@ -13,8 +13,7 @@
 
 ## Problem 
 > Police officers are hiding in train stations, to get people who cannot afford the $2.75 fee. 
-> They’re preying on black youth, using that as an excuse to stop and frisk and to fill their monthly quotas.  
-> By designing our app, we hope to keep our community inform of police presence in train stations, and also provide them with ressources to assist them with bus/train pass to combat fare evasion and keep the youth out of the criminal justice system.
+> They’re preying on black youth, using that as an excuse to stop and frisk and to fill their monthly quotas.By designing our app, we hope to keep our community inform of police presence in train stations, and also provide them with ressources to assist them with bus/train pass to combat fare evasion and keep the youth out of the criminal justice system.
 
 ## Solution
 > - This application allows users to report police presence and stay away from high concentrated areas.
