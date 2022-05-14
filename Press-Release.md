@@ -27,7 +27,7 @@
 
 
 ## Key Technical Challenge 
->  Our most challenging technical challenge will be trying to implement the heat map and user authentication. We have set up routes, and database endpoints. In addition, we want to use Google API to map stations by making request to get live datas and send it to our front end. We want users to be able to click on a station that will then navigate them to a page that will show a report, we will also add the ability to create a report.
+>  Our most challenging technical challenge will be trying to implement the heat map and user authentication. We have set up routes, and database endpoints. In addition, we want to use Google API to map stations by making request to get live datas and send it to our front end. We want users to be able to click on a station that will then navigate them to a page that will show a report, we will also add the ability for users to create reports and edit as they wish.
 
 ## Extension opportunities
 > For extensions, We will show icons and identifiers on the heat map. 
