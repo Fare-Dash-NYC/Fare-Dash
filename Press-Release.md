@@ -1,6 +1,7 @@
 # Fare-Dash-NYC
-## Press Release
-> Fare Evasion to prison pipeline. 
+## Fare Evasion to prison pipeline. 
+
+> If low-income public transit users had access to ressources that helped with MTA fares and were made aware of cop presence in the subways , fewer people will suffer from police harassment and high fines.
 
 ## Mission Statement
 > Fare Dash is a platform that provides real-time updates of police sightings at stations, and access to reduced MTA fare by allowing users to make onsite reports of police activity and gifting a metro card to those who are eligible with the goal of decreasing the number of people receiving $100 fines for fare evasion. 
@@ -8,7 +9,7 @@
 ## Summary
 > The MTA released slides showing fare evasion rising to historically high levels on subways and even more so on buses. 
 > They are pushing a false fare evasion narrative, targeting black and brown New Yorkers. Fare evasion is a criminal offense. 
-> If convicted, you may get a criminal record and pay a fine of up to $100. If low-income public transit users had access to ressources that helped with MTA fares and were made aware of cop presence in the subways , fewer people will suffer from police harassment and high fines.
+> If convicted, you may get a criminal record and pay a fine of up to $100. 
 
 
 ## Problem 
