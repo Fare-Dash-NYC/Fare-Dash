@@ -8,16 +8,19 @@ module.exports = {
   development: {
     client: 'postgresql',
     connection: {
-      database: 'fare_dash',
-      user:     'postgres',
-      password: ''
+      database: 'faredash',
+      user: 'test',
+      password: 'test'
   },
-  production: {
-    client: 'postgresql',
-    connection: process.env.DATABASE_URL,
-    migrations: {
-      tableName: 'knex_migrations'
-    }
+  seeds: {
+    directory: './data/seeds'
+  }
+},
+production: {
+  client: 'postgresql',
+  connection: process.env.DATABASE_URL,
+  migrations: {
+    tableName: 'knex_migrations'
   }
 }
 };
