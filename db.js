@@ -2,7 +2,7 @@ const { Pool } = require('pg');
 
 
 const connectionDevelopment = {
-    database: 'fare_dash',
+    database: 'faredash',
     user: 'postgres',
     password: '',
     host: 'localhost',
