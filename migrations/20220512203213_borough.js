@@ -5,6 +5,7 @@
 exports.up = function(knex) {
     return knex.schema.createTable("borough", (table) => {
         table.increments("borough_id");
+        table.string("borough_name").notNullable();
         table.integer("station_id").notNullable();
       });
 };
