@@ -1,4 +1,28 @@
 const {query} = require("../db");
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+let populated = false;
+//populate stations table
+
+
+
+async function fetchStations(){
+  if(!populated){
+    const response = await fetch("https://data.cityofnewyork.us/resource/kk4q-3rt2.json");
+    const stations = await response.json();
+    //
+  
+    const sql =
+    "insert into station ( station_name, long, lat, line) values ($1, $2, $3, $4)";
+  
+    stations.forEach(station => {
+      const {name, the_geom, line} = station
+      const data = query(sql, [name, the_geom.coordinates[0], the_geom.coordinates[1], line])
+    }) 
+    
+    let populated = true
+  }
+  return;
+}
 
 //get all users from database
 async function getAllUsers(req, res) {
@@ -16,27 +40,17 @@ async function getAllUsers(req, res) {
 
 //get a single user from table matching id
 async function getAUser(req, res) {
-    const id = parseInt(res["user_id"], 10);
-    try {
-      const user = await db.one("SELECT * FROM users where id = $1", id);
-      return res.json(user);
-    } catch (err) {
-      return res.status(500).json({message: err.message});
-    }
+  const id = req.params.id
+  console.log(id)
+  try {
+    const user = await query("SELECT * FROM users where id = $1", [id]);
+    console.log(user)
+    return res.json(user);
+  } catch (err) {
+    console.log(err)
+    return res.status(500).send(err);
   }
-  
-  async function getUserInfo(req, res) {
-    const userID = req.body["user_id"] ? parseInt(req.body["user_id"], 10) : parseInt(req.params["user_id"]);
-  
-    try {
-      const user = await db.one("SELECT * FROM users where id = $1", userID);
-      return res.json(user);
-      
-    } catch (err) {
-      return res.status(500).json({message: err.message})
-    }
-  }
-
+} 
   //create user
 async function createUser(req, res) {
   
@@ -179,9 +193,9 @@ console.log(report)
 
   module.exports = {
     getAllUsers,
+    fetchStations,
     makeReport,
     getAUser,
-    getUserInfo,
     createUser,
     loginUser,
     deleteUser,
