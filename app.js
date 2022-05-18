@@ -1,23 +1,25 @@
 const express = require('express');
 const app = express();
-//const { pool } = require('./db.js');
-const userRouter = require('./routes/users');
+const userRouter = require('./routes/usersRoutes');
 const cors = require("cors");
+const {query} = require("./db")
 
 
-const PORT = process.env.port || 8080;
+const PORT = process.env.port || 8081;
 
 //middleware
-app.use(express.urlencoded());
 app.use(express.json());
 app.use(cors())
+app.use(userRouter);
 
-//routers
-app.use("/users", userRouter.js);
 app.get('/', async (req, res) => {
-    console.log("You are here, headers:", req.headers);
-});
-
+    try {
+      const user = await query("SELECT * FROM users");
+      return res.json(user.rows[0]);
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  })
 
 app.listen(PORT, ()=>{
     console.log('app started ')

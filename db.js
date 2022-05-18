@@ -2,11 +2,11 @@ const { Pool } = require('pg');
 
 
 const connectionDevelopment = {
-    database: 'faredash',
-    user: 'postgres',
+    database: 'fare_dash',
+    user: 'janmorales',
     password: '',
     host: 'localhost',
-    port: 8080
+    port: 5432
   }
   
   const connectionProduction = {
@@ -16,6 +16,8 @@ const connectionDevelopment = {
   
   const pool = new Pool(process.env.NODE_ENV === 'production' ? connectionProduction : connectionDevelopment)
 
-  module.exports = {
-      pool
-  }
+  const query = (queryText, queryParams) => {
+    return pool.query(queryText, queryParams) //return the entire database promise
+}
+
+module.exports = {query};

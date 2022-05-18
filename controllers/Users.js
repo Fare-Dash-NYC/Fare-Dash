@@ -1,30 +1,18 @@
-const db = require("../db");
+const {query} = require("../db");
 
-//get all useres from database
+//get all users from database
 async function getAllUsers(req, res) {
+  const user = await query("SELECT * FROM users");
     try {
-      const user = await db.any("SELECT * FROM users");
-      return res.json(user);
+      return res.status(201).json(user);
     } catch (err) {
       res.status(500).send(err);
     }
   }
 
+
   //get user by display_name
-async function getUserByDisplayName(req, res) {
-    const query = req.params.query
-    console.log("query: ", query)
-    try {
-      //console.log("inside try")
-      const results = await db.any(
-        `SELECT * FROM users WHERE lower(display_name) LIKE '%${query.toLowerCase()}%';`
-      );
-      //console.log("results: ", results);
-      return res.status(200).json(results);
-    } catch (err) {
-      res.status(500).json(err.message);
-    }
-  }
+
 
 //get a single user from table matching id
 async function getAUser(req, res) {
@@ -139,41 +127,6 @@ async function loginUser(req, res) {
   }
 
 //update single user from database
-async function updateUser(req, res) {
-
-    function parseBody(req) {
-      const changes = Object.entries(req.body);
-      console.log(`changes ${changes}`)
-  
-      let query = 'UPDATE users SET';
-  
-      changes.forEach(([key, value], idx) => {
-          if (changes.length > 1 && idx!==changes.length-1) {
-              query += ` ${key}='${value}',`
-          } else {
-              query += ` ${key}='${value}'`
-          }
-      })
-  
-      query += ` WHERE id=${parseInt(res["user_id"], 10)} RETURNING *;`
-  
-      console.log(`query: ${query}`)
-  
-      return query
-    }
-  
-    try {
-      await db.one(parseBody(req))
-      return res.status(202).json({
-        message: "success"
-      });
-    } catch (err){
-      return res.status(500).json({
-        message: err.message
-      });
-    }
-  
-  }
 
 //delete a user from database
 async function deleteUser(req, res) {
@@ -204,14 +157,33 @@ async function locateUser(req, res) {
   }
 }
 
+async function makeReport(req, res) {
+  const { user_id, station_id, incident, more_details, confirm} = req.body
+  const sql =
+  "insert into report (user_id, station_id, incident, more_details, confirm) values ($1, $2, $3, $4, $5) returning *";
+
+const report = (await query(sql, [user_id, station_id, incident, more_details, confirm]))
+console.log(report)
+  try {
+    
+    return res.status(201).json({
+      report
+    })
+
+    } catch (error) { 
+      res.status(500).json({
+        message: error.message,
+      });
+    }
+  }
+
   module.exports = {
     getAllUsers,
-    getUserByDisplayName,
+    makeReport,
     getAUser,
     getUserInfo,
     createUser,
     loginUser,
-    updateUser,
     deleteUser,
     locateUser,
   };
