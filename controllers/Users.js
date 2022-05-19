@@ -9,7 +9,6 @@ async function fetchStations(){
   if(!populated){
     const response = await fetch("https://data.cityofnewyork.us/resource/kk4q-3rt2.json");
     const stations = await response.json();
-    //
   
     const sql =
     "insert into station ( station_name, long, lat, line) values ($1, $2, $3, $4)";
@@ -77,13 +76,13 @@ async function createUser(req, res) {
     // }
   
     // let token;
-    const {first_name, last_name, email, password, display_name} = req.body;
+    const {firstName, lastName, email, password, displayName} = req.body;
     const sql = "INSERT INTO users ( first_name, last_name, email, password, display_name) VALUES ($1, $2, $3, $4, $5)"
     
 
     try {
   
-      const user = await query(sql, [first_name, last_name, email, password, display_name])
+      const user = await query(sql, [firstName, lastName, email, password, displayName])
       console.log(user)
       // const userID = await db.one("SELECT id,  FROM users WHERE display_name=${display_name}", user)
         
