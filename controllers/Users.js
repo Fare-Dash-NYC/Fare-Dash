@@ -54,52 +54,53 @@ async function getAUser(req, res) {
   //create user
 async function createUser(req, res) {
   
-    let user = req.body;
-    let hashedPassword;
-    const saltRounds = 10;
-    console.log('create a user: ', user)
+    
+    // let hashedPassword;
+    // const saltRounds = 10;
+    // console.log('create a user: ', user)
     
     // validate user account info (needs work)
-    if (!user) {
-      return res.status(400).json({
-        message: "Invalid account info"
-      })
-    }
+    // if (!user) {
+    //   return res.status(400).json({
+    //     message: "Invalid account info"
+    //   })
+    // }
   
-    try {
-      hashedPassword = await bcrypt.hash(user.password, saltRounds);
-      user["password"] = hashedPassword;
-    } catch (err) {
-      return res.status(401).json({
-        message: "Invalid password",
-        error: err.message
-      })
-    }
+    // try {
+    //   hashedPassword = await bcrypt.hash(user.password, saltRounds);
+    //   user["password"] = hashedPassword;
+    // } catch (err) {
+    //   return res.status(401).json({
+    //     message: "Invalid password",
+    //     error: err.message
+    //   })
+    // }
   
-    let token;
+    // let token;
+    const {first_name, last_name, email, password, display_name} = req.body;
+    const sql = "INSERT INTO users ( first_name, last_name, email, password, display_name) VALUES ($1, $2, $3, $4, $5)"
     
+
     try {
-      await db.none(
-        "INSERT INTO users (display_name, first_name, last_name, display_name, email, password) VALUES (${display_name}, ${first_name}, ${last_name}, ${display_name}, ${email}, ${password})",
-        user
-      );
   
-      const userID = await db.one("SELECT id,  FROM users WHERE display_name=${display_name}", user)
+      const user = await query(sql, [first_name, last_name, email, password, display_name])
+      console.log(user)
+      // const userID = await db.one("SELECT id,  FROM users WHERE display_name=${display_name}", user)
         
-      console.log("userID ", userID)
+      // console.log("userID ", userID)
         
-      token = await generateToken(userID)
+      // token = await generateToken(userID)
       
-      // return res.status(201).json({
-        //   message: "user account registered"
-      // })
+      return res.status(201).json({
+          message: "user account registered"
+      })
   
     } catch (err) {
       console.log(`ERR CAUGHT: ${err.message}`)
       return res.status(400).send(err);
     }
     
-    return res.status(201).json({token})
+    // return res.status(201).json({token})
         
   }
 

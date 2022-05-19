@@ -11,6 +11,9 @@ module.exports = {
       database: 'fare_dash',
       user: 'postgres',
       password: ''
+  },
+  seeds: {
+    directory: './data/seeds',
   }
 },
 production: {
@@ -19,6 +22,9 @@ production: {
   
   migrations: {
     tableName: 'knex_migrations'
-  }
+  },
+  seeds: {
+    directory: './seeds',
+  },
 }
 };
