@@ -172,11 +172,11 @@ async function locateUser(req, res) {
 }
 
 async function makeReport(req, res) {
-  const { user_id, station_id, incident, more_details, confirm} = req.body
+  const { station, reportType, details} = req.body
   const sql =
-  "insert into report (user_id, station_id, incident, more_details, confirm) values ($1, $2, $3, $4, $5) returning *";
+  "insert into report (station_name, incident, more_details) values ($1, $2, $3) returning *";
 
-const report = (await query(sql, [user_id, station_id, incident, more_details, confirm]))
+const report = (await query(sql, [station, reportType, details]))
 console.log(report)
   try {
     
