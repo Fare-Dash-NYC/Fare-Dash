@@ -56,50 +56,29 @@ async function getAUser(req, res) {
   //create user
 async function createUser(req, res) {
   
-    
-    // let hashedPassword;
-    // const saltRounds = 10;
-    // console.log('create a user: ', user)
-    
-    // validate user account info (needs work)
-    // if (!user) {
-    //   return res.status(400).json({
-    //     message: "Invalid account info"
-    //   })
-    // }
-  
-    // try {
-    //   hashedPassword = await bcrypt.hash(user.password, saltRounds);
-    //   user["password"] = hashedPassword;
-    // } catch (err) {
-    //   return res.status(401).json({
-    //     message: "Invalid password",
-    //     error: err.message
-    //   })
-    // }
-  
-    // let token;
     const {firstName, lastName, email, password, displayName} = req.body;
-    const sql = "INSERT INTO users ( first_name, last_name, email, password, display_name) VALUES ($1, $2, $3, $4, $5)"
     
 
     try {
-  
-      const user = await query(sql, [firstName, lastName, email, password, displayName])
+
+      const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+      const sql = "INSERT INTO users ( first_name, last_name, email, password, display_name) VALUES ($1, $2, $3, $4, $5)"
+      const user = await query(sql, [firstName, lastName, email, hashedPassword, displayName])
+      const token = await generateToken(user.user_id);
+
       console.log(user)
-      // const userID = await db.one("SELECT id,  FROM users WHERE display_name=${display_name}", user)
-        
-      // console.log("userID ", userID)
-        
-      // token = await generateToken(userID)
       
       return res.status(201).json({
-          message: "user account registered"
-      })
+        user,
+        token
+      });
   
     } catch (err) {
-      console.log(`ERR CAUGHT: ${err.message}`)
-      return res.status(400).send(err);
+      console.log(err.message);
+    res.status(500).json({
+      message: err.message,
+    });
     }
     
     // return res.status(201).json({token})
@@ -108,40 +87,39 @@ async function createUser(req, res) {
 
   //loginUser 
 async function loginUser(req, res) {
-    const { password } = req.body
-  
-    const {exists} = await db.one('SELECT EXISTS(SELECT * FROM users WHERE display_name=${display_name})', req.body)
-  
-    let user;
-  
-    if (!exists) {
-      return res.status(404).json({
-        message: "No user found with that user name"
-      })
-    } else {
-      user = await db.one('SELECT * FROM users WHERE display_name=${display_name}', req.body)
-      console.log(user)
+  try {
+    const { email, password } = req.body;
+
+    const user = await (
+      await query("select * from users where email = $1", [email])
+    ).rows[0];
+
+    if (!user) {
+      return res.status(401).json({
+        message: "You sure you have the right email?",
+      });
     }
-  
-    let match;
-  
-    try {
-      match = await bcrypt.compare(password, user.password);
-      if (!match) {
-        return res.status(401).json({
-          message: "Invalid Credentials", 
-        })
-      } else {
-  
-        const token = await generateToken(user);
-  
-        return res.status(202).json({"token": token})
-      }
-  
-    } catch (err) {
-      return res.status(400).json(err.message)
+
+    const passwordCorrect = await bcrypt.compare(password, user.password);
+
+    if (!passwordCorrect) {
+      return res.status(401).json({
+        message: "You sure you have the right password?",
+      });
     }
+
+    const token = await generateToken(user.user_id);
+    // console.log(user)
+    return res.status(200).json({
+        user,
+        token
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: err.message,
+    });
   }
+};
 
 //update single user from database
 
@@ -194,6 +172,16 @@ console.log(report)
     }
   }
 
+async function verifyToken(req, res) {
+  try {
+    res.json(true)
+  } catch (err) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+}
+
   module.exports = {
     getAllUsers,
     fetchStations,
@@ -203,4 +191,5 @@ console.log(report)
     loginUser,
     deleteUser,
     locateUser,
+    verifyToken
   };
