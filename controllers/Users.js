@@ -1,9 +1,12 @@
 const {query} = require("../db");
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
-let populated = false;
+const bcrypt = require("bcrypt");
+const { generateToken } = require("../utils");
+const authCheck = require("../middleware/checkAuth");
 //populate stations table
 
-
+const saltRounds = 10;
+let populated = false;
 
 async function fetchStations(){
   if(!populated){
@@ -172,7 +175,7 @@ async function locateUser(req, res) {
 }
 
 async function makeReport(req, res) {
-  const { station, reportType, details} = req.body
+  const { station, reportType, details} = req.body  
   const sql =
   "insert into report (station_name, incident, more_details) values ($1, $2, $3) returning *";
 
