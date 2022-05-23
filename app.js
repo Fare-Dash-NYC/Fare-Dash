@@ -12,6 +12,8 @@ app.use(express.json());
 app.use(cors())
 app.use(userRouter);
 
+app.use("/dashboard", require("./routes/dashboard"));
+
 app.get('/', async (req, res) => {
     try {
       const user = await query("SELECT * FROM users");
