@@ -17,7 +17,7 @@
 
 
 ## Problem 
-Police officers are hiding in train stations, to get people who cannot afford the $2.75 fee. They’re preying on black youth, using that as an excuse to stop and frisk and to fill their monthly quotas.
+Police officers are hiding in train stations, to get people who cannot afford the $2.75 fee. They’re preying on black youth, using that as an excuse to stop and frisk so they can fill their monthly quotas.
 
 
 ## Solution
